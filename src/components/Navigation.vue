@@ -1,0 +1,27 @@
+<template lang="pug">
+  section.navigation
+    .bar
+      button C
+      button U
+      button.settings S
+
+    .panel
+</template>
+
+<style lang="sass" scoped>
+  .bar
+    width: 45px
+    height: 100vh
+    background-color: var(--navigation-bar)
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+    align-items: stretch
+
+    button
+      width: 45px
+      height: 45px
+
+    button.settings
+      margin-top: auto
+</style>
