@@ -12,23 +12,23 @@
 </style>
 
 <script>
-import db from 'localforage'
+  import db from 'localforage'
 
-import Log from '@/components/Chat/Log'
-import Input from '@/components/Chat/Input'
+  import Log from '@/components/Chat/Log'
+  import Input from '@/components/Chat/Input'
 
-export default {
-  name: 'Home',
+  export default {
+    name: 'Home',
 
-  components: {
-    Log,
-    Input,
-  },
+    components: {
+      Log,
+      Input,
+    },
 
-  async mounted () {
-    await this.$store.dispatch('CryptoSetup')
-    window.rsa = this.$store.state.rsa
-    window.db = db
-  },
-}
+    async mounted () {
+      await this.$store.dispatch('CryptoSetup')
+      window.rsa = this.$store.state.rsa
+      window.db = db
+    },
+  }
 </script>

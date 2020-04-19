@@ -1,12 +1,27 @@
 <template lang="pug">
   section.navigation
     .bar
-      button C
-      button U
-      button.settings S
+      button 
+        Icon list
+
+      button
+        Icon user
+
+      button.settings
+        Icon settings
 
     .panel
 </template>
+
+<script>
+  import Icon from '@/components/Icon'
+
+  export default {
+    components: {
+      Icon,
+    },
+  }
+</script>
 
 <style lang="sass" scoped>
   .bar

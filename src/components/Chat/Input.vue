@@ -1,8 +1,19 @@
 <template lang="pug">
   section.input
-    button.attach A
+    button.attach
+      Icon paperclip
     textarea( placeholder="Enter message.." )
 </template>
+
+<script>
+  import Icon from '@/components/Icon'
+
+  export default {
+    components: {
+      Icon,
+    },
+  }
+</script>
 
 <style lang="sass" scoped>
   section.input

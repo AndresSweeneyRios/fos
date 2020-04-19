@@ -76,5 +76,15 @@ module.exports = {
     'space-in-parens': ['error', 'never'],
     'space-infix-ops': 'error',
     'template-tag-spacing': ['error', 'always'],
+    "vue/script-indent": ["error", 2, { baseIndent: 1 }],
+    "vue/html-indent": ["error", 2, { baseIndent: 1 }],
   },
+  overrides: [
+    {
+      "files": ["*.vue"],
+      "rules": {
+        "indent": "off",
+      },
+    },
+  ],
 }
