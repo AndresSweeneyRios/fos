@@ -3,30 +3,30 @@
 </template>
 
 <script>
-  import MarkdownIt from 'markdown-it'
-  import Prism from 'prismjs'
-  // import marked from 'marked'
-  // import hljs from 'highlight.js'
+import MarkdownIt from 'markdown-it'
+import Prism from 'prismjs'
+// import marked from 'marked'
+// import hljs from 'highlight.js'
 
-  const markdown = MarkdownIt({
-    linkify: true,
-    highlight (string, language) {
-      return language && Prism.languages[language]  
-        ? Prism.highlight(string, Prism.languages[language])
-        : string
-    }
-  })
+const markdown = MarkdownIt({
+  linkify: true,
+  highlight (string, language) {
+    return language && Prism.languages[language]  
+      ? Prism.highlight(string, Prism.languages[language])
+      : string
+  },
+})
 
-  export default {
-    methods: {
-      escapeHTML (text) {
-        // console.log(hljs.highlightBlock(text))
-        return text
-      },
-
-      md: string => markdown.render(string),
+export default {
+  methods: {
+    escapeHTML (text) {
+      // console.log(hljs.highlightBlock(text))
+      return text
     },
-  }
+
+    md: string => markdown.render(string),
+  },
+}
 </script>
 
 <style lang="sass" scoped>

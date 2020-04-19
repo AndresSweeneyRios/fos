@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/',
     name: 'Chat',
-    component: Chat
+    component: Chat,
   },
 //   {
 //     path: '/about',
@@ -23,7 +23,7 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 })
 
 export default router
