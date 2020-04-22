@@ -1,8 +1,10 @@
-const path = require('path')
-const express = require('express')
-const api = require('./api')
+import path from 'path'
+import express from 'express'
+import api from './api'
 
-module.exports = async props => {
+import Props from '@interfaces/Props'
+
+export default async (props: Props) => {
   const {
     config, 
     success,

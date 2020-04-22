@@ -1,12 +1,12 @@
 const ALGORITHM = 'RSA-OAEP'
 const HASH = 'SHA-256'
 
-const decode = buffer => String.fromCharCode(
+const decode = (buffer: ArrayBuffer) => String.fromCharCode(
   ...new Uint8Array(buffer),
 )
 
-const encode = string => Uint8Array.from(
-  [...string].map(char => char.charCodeAt()),
+const encode = (string: string) => Uint8Array.from(
+  [...string].map(char => char.charCodeAt(0)), // TODO: verify working with `0` argument
 ).buffer
 
 export const GenerateRSAKeypair = (length = 1024) => crypto.subtle.generateKey(
@@ -21,12 +21,12 @@ export const GenerateRSAKeypair = (length = 1024) => crypto.subtle.generateKey(
 )
 
 export const ImportRSAKey = ( 
-  key, 
+  encodedKey: string, 
   extractable = false, 
-  usages,
+  usages: Array<string>,
 ) => crypto.subtle.importKey(
   'jwk', 
-  JSON.parse(atob(key)), 
+  JSON.parse(atob(encodedKey)), 
   {
     name: ALGORITHM,
     hash: HASH, 
@@ -35,23 +35,33 @@ export const ImportRSAKey = (
   usages,
 )
 
-export const ExportRSAKey = async key => btoa(JSON.stringify(
+export const ExportRSAKey = async (key: CryptoKey) => btoa(JSON.stringify(
   await crypto.subtle.exportKey('jwk', key),
 ))
 
-export const RawRSA = async (key, { isPrivate } = {}) => ({
-  encrypt: async data => decode(
+type RSAOptions = {
+  isPrivate: boolean
+}
+
+export const RawRSA = async (
+  key: CryptoKey, 
+  { isPrivate } = { isPrivate: false } as RSAOptions,
+) => ({
+  encrypt: async (data: string) => decode(
     await crypto.subtle.encrypt(ALGORITHM, key, encode(data)),
   ),
 
-  decrypt: async data => decode(
+  decrypt: async (data: string) => decode(
     await crypto.subtle.decrypt(ALGORITHM, key, encode(data)),
   ),
 
   key: isPrivate ? null : await ExportRSAKey(key),
 })
 
-export const RSA = async (encodedKey, { isPrivate } = {}) => {
+export const RSA = async (
+  encodedKey: string, 
+  { isPrivate } = { isPrivate: false } as RSAOptions,
+) => {
   const key = await ImportRSAKey(
     encodedKey, 
     !isPrivate, 

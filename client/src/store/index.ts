@@ -34,8 +34,8 @@ export default new Vuex.Store({
 
       if (encodedRSAPrivateKey && encodedRSAPublicKey) {
         const rsa = {
-          private: await RSA(encodedRSAPrivateKey, { isPrivate: true }),
-          public: await RSA(encodedRSAPublicKey),
+          private: await RSA(encodedRSAPrivateKey as string, { isPrivate: true }),
+          public: await RSA(encodedRSAPublicKey as string),
         }
 
         commit('set', { rsa })
