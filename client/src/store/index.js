@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
-Vue.use(Vuex)
-
 import db from 'localforage'
 
 import {
@@ -11,6 +8,8 @@ import {
   RSA,
   RawRSA,
 } from './rsa.js'
+
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
@@ -34,8 +33,8 @@ export default new Vuex.Store({
 
       if (encodedRSAPrivateKey && encodedRSAPublicKey) {
         const rsa = {
-          private: await RSA(encodedRSAPrivateKey as string, { isPrivate: true }),
-          public: await RSA(encodedRSAPublicKey as string),
+          private: await RSA(encodedRSAPrivateKey, { isPrivate: true }),
+          public: await RSA(encodedRSAPublicKey),
         }
 
         commit('set', { rsa })

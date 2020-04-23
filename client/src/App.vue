@@ -1,15 +1,15 @@
 <template lang="pug">
-  main#app
+  main
     Navigation
     router-view
 </template>
 
 <style lang="sass">
-  @import '@/sass/global'
+  @import './sass/global'
 </style>
 
 <style lang="sass" scoped>
-  main#app
+  main
     display: flex
     width: 100vw
     height: 100vh
@@ -17,7 +17,7 @@
 </style>
 
 <script>
-  import Navigation from '@/components/Navigation'
+  import Navigation from './components/Navigation.vue'
 
   export default {
     components: {

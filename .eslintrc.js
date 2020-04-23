@@ -3,10 +3,9 @@ module.exports = {
   env: {
     node: true,
   },
-  'extends': [
-    'plugin:vue/essential',
+  extends: [
     'eslint:recommended',
-    '@vue/typescript/recommended',
+    'react-app',
   ],
   parserOptions: {
     ecmaVersion: 2020,
@@ -77,8 +76,6 @@ module.exports = {
     'space-in-parens': ['error', 'never'],
     'space-infix-ops': 'error',
     'template-tag-spacing': ['error', 'always'],
-    "vue/script-indent": ["error", 2, { baseIndent: 1 }],
-    "vue/html-indent": ["error", 2, { baseIndent: 1 }],
     '@typescript-eslint/member-delimiter-style': ['error', {
       multiline: {
         delimiter: "none",
@@ -90,12 +87,4 @@ module.exports = {
       },
     }],
   },
-  overrides: [
-    {
-      "files": ["*.vue"],
-      "rules": {
-        "indent": "off",
-      },
-    },
-  ],
 }

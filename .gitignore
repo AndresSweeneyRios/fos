@@ -22,3 +22,5 @@ yarn-error.log*
 
 config.json
 /data
+/server/dist
+/client/dist

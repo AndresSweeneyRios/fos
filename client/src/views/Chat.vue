@@ -14,8 +14,8 @@
 <script>
   import db from 'localforage'
 
-  import Log from '@/components/Chat/Log'
-  import Input from '@/components/Chat/Input'
+  import Log from '@/components/Chat/Log.vue'
+  import Input from '@/components/Chat/Input.vue'
 
   export default {
     name: 'Home',

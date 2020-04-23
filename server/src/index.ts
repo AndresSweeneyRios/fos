@@ -2,7 +2,7 @@ import chalk from 'chalk'
 import path from 'path'
 import Datastore from 'nedb-promises'
 
-import config from '../config'
+import config from '../../config'
 import router from './router'
 
 const success = (...args: Array<string>) => {
