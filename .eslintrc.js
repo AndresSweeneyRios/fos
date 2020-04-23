@@ -6,7 +6,6 @@ module.exports = {
   },
 
   extends: [
-    'eslint:recommended',
     "plugin:vue/essential",
   ],
 
@@ -15,7 +14,6 @@ module.exports = {
   parserOptions: {
     sourceType: 'module',
     parser: 'babel-eslint',
-    sourceType: 'module',
     allowImportExportEverywhere: false,
     ecmaVersion: 2020,
   },
@@ -86,27 +84,37 @@ module.exports = {
     'space-in-parens': ['error', 'never'],
     'space-infix-ops': 'error',
     'template-tag-spacing': ['error', 'always'],
+    "vue/script-indent": ["error", 2, { baseIndent: 1 }],
+    "vue/html-indent": ["error", 2, { baseIndent: 1 }],
   },
 
-  overrides: [{
-    files: ['server/**.ts'],
+  overrides: [
+    {
+      "files": ["*.vue"],
+      "rules": {
+        "indent": "off",
+      },
+    },
+    {
+      files: ['server/**.ts'],
 
-    extends: [
-      "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:@typescript-eslint/recommended",
-    ],
+      extends: [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+      ],
 
-    rules: {
-      '@typescript-eslint/member-delimiter-style': ['error', {
-        multiline: {
-          delimiter: "none",
-          requireLast: true,
-        },
-        singleline: {
-          delimiter: "comma",
-          requireLast: true,
-        },
-      }],
-    }
-  }]
+      rules: {
+        '@typescript-eslint/member-delimiter-style': ['error', {
+          multiline: {
+            delimiter: "none",
+            requireLast: true,
+          },
+          singleline: {
+            delimiter: "comma",
+            requireLast: true,
+          },
+        }],
+      }
+    },
+  ]
 }
