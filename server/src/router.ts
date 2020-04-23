@@ -4,7 +4,7 @@ import api from './api'
 
 import Props from '@interfaces/Props'
 
-export default async (props: Props) => {
+export default async (props: Props): Promise<void> => {
   const {
     config, 
     success,

@@ -14,13 +14,13 @@
 </template>
 
 <script>
-  import Icon from './Icon.vue'
+import Icon from './Icon.vue'
 
-  export default {
-    components: {
-      Icon,
-    },
-  }
+export default {
+  components: {
+    Icon,
+  },
+}
 </script>
 
 <style lang="sass" scoped>

@@ -18,49 +18,49 @@
 </template>
 
 <script>
-  import Markdown from '@/components/Chat/Markdown.vue'
+import Markdown from '@/components/Chat/Markdown.vue'
 
-  export default {
-    methods: {
-      processLocaleString (timestamp) {
-        const [date, time] = new Date(timestamp).toLocaleString()
-          .split(', ')  
+export default {
+  methods: {
+    processLocaleString (timestamp) {
+      const [date, time] = new Date(timestamp).toLocaleString()
+        .split(', ')  
         
-        return [date, time.replace(/:..\s/, ' ')]
-      },
-
-      processDate (timestamp) {
-        const [date, time] = this.processLocaleString(timestamp)
-
-        const [currentDate] = this.processLocaleString(Date.now())
-
-        return currentDate === date ? time : `${date} - ${time}`
-      },
+      return [date, time.replace(/:..\s/, ' ')]
     },
 
-    components: {
-      Markdown,
-    },
+    processDate (timestamp) {
+      const [date, time] = this.processLocaleString(timestamp)
 
-    computed: {
-      messages () {
-        return [
-          {
-            avatar: 'https://cdn.discordapp.com/avatars/97466512444493824/42acc98a2e976e1df5450184450768cb.png?size=128',
-            name: 'Poison Apple',
-            timestamp: Date.now() - 5000000000,
-            content: [
-              {
-                text: 'Hello `World!`',
-              },
-              {
-                text: 'Also **hello** *world!*',
-              },
-              {
-                text: 'And more ~~hello~~ world!',
-              },
-              {
-                text: 
+      const [currentDate] = this.processLocaleString(Date.now())
+
+      return currentDate === date ? time : `${date} - ${time}`
+    },
+  },
+
+  components: {
+    Markdown,
+  },
+
+  computed: {
+    messages () {
+      return [
+        {
+          avatar: 'https://cdn.discordapp.com/avatars/97466512444493824/42acc98a2e976e1df5450184450768cb.png?size=128',
+          name: 'Poison Apple',
+          timestamp: Date.now() - 5000000000,
+          content: [
+            {
+              text: 'Hello `World!`',
+            },
+            {
+              text: 'Also **hello** *world!*',
+            },
+            {
+              text: 'And more ~~hello~~ world!',
+            },
+            {
+              text: 
                   `\`\`\`js
 const abc = 'def';
 
@@ -68,30 +68,30 @@ function helloWorld () {
   alert(\`hello world\`);
 }
 \`\`\``,
-              },
-            ],
-          },
-          {
-            avatar: 'https://cdn.discordapp.com/avatars/97466512444493824/42acc98a2e976e1df5450184450768cb.png?size=128',
-            name: 'Poison Apple',
-            timestamp: Date.now(),
-            content: [
-              {
-                text: 'Hello World!',
-              },
-            ],
-          },
-        ].map(
-          ({
-            timestamp, ...restProps 
-          }) => ({
-            date: this.processDate(timestamp),
-            ...restProps,
-          }),
-        )
-      },
+            },
+          ],
+        },
+        {
+          avatar: 'https://cdn.discordapp.com/avatars/97466512444493824/42acc98a2e976e1df5450184450768cb.png?size=128',
+          name: 'Poison Apple',
+          timestamp: Date.now(),
+          content: [
+            {
+              text: 'Hello World!',
+            },
+          ],
+        },
+      ].map(
+        ({
+          timestamp, ...restProps 
+        }) => ({
+          date: this.processDate(timestamp),
+          ...restProps,
+        }),
+      )
     },
-  }
+  },
+}
 </script>
 
 <style lang="sass" scoped>

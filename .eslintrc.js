@@ -1,15 +1,25 @@
 module.exports = {
   root: true,
+
   env: {
     node: true,
   },
+
   extends: [
     'eslint:recommended',
-    'react-app',
+    "plugin:vue/essential",
   ],
+
+  parser: 'vue-eslint-parser',
+
   parserOptions: {
+    sourceType: 'module',
+    parser: 'babel-eslint',
+    sourceType: 'module',
+    allowImportExportEverywhere: false,
     ecmaVersion: 2020,
   },
+
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
@@ -76,15 +86,27 @@ module.exports = {
     'space-in-parens': ['error', 'never'],
     'space-infix-ops': 'error',
     'template-tag-spacing': ['error', 'always'],
-    '@typescript-eslint/member-delimiter-style': ['error', {
-      multiline: {
-        delimiter: "none",
-        requireLast: true,
-      },
-      singleline: {
-        delimiter: "comma",
-        requireLast: true,
-      },
-    }],
   },
+
+  overrides: [{
+    files: ['server/**.ts'],
+
+    extends: [
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+    ],
+
+    rules: {
+      '@typescript-eslint/member-delimiter-style': ['error', {
+        multiline: {
+          delimiter: "none",
+          requireLast: true,
+        },
+        singleline: {
+          delimiter: "comma",
+          requireLast: true,
+        },
+      }],
+    }
+  }]
 }
