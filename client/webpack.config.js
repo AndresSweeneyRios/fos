@@ -26,6 +26,11 @@ module.exports = () => ({
         ],
       },
       {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
         test: /\.sass$/,
         use: [
           'vue-style-loader',
@@ -88,10 +93,11 @@ module.exports = () => ({
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
+    extensions: ['.tsx', '.ts', '.js', '.vue'],
   },
 
   entry: {
-    app: './src/index.js',
+    app: './src/index.ts',
   },
 
   output: {

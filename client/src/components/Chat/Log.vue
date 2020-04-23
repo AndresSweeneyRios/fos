@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import Markdown from '@/components/Chat/Markdown.vue'
+  import Markdown from './Markdown'
 
   export default {
     methods: {

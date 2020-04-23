@@ -7,7 +7,7 @@ import {
   ExportRSAKey,
   RSA,
   RawRSA,
-} from './rsa.js'
+} from './rsa'
 
 Vue.use(Vuex)
 
@@ -28,13 +28,13 @@ export default new Vuex.Store({
 
   actions: {
     async CryptoSetup ({ commit }) {
-      const encodedRSAPrivateKey = await db.getItem('rsa_private_key')
-      const encodedRSAPublicKey = await db.getItem('rsa_public_key')
+      const encodedRSAPrivateKey: string = await db.getItem('rsa_private_key')
+      const encodedRSAPublicKey: string = await db.getItem('rsa_public_key')
 
       if (encodedRSAPrivateKey && encodedRSAPublicKey) {
         const rsa = {
-          private: await RSA(encodedRSAPrivateKey, { isPrivate: true }),
-          public: await RSA(encodedRSAPublicKey),
+          private: await RSA(encodedRSAPrivateKey, true),
+          public: await RSA(encodedRSAPublicKey, false),
         }
 
         commit('set', { rsa })
@@ -47,8 +47,8 @@ export default new Vuex.Store({
         await db.setItem('rsa_private_key', await ExportRSAKey(privateKey))
 
         const rsa = {
-          private: await RawRSA(privateKey, { isPrivate: true }),
-          public: await RawRSA(publicKey),
+          private: await RawRSA(privateKey, true),
+          public: await RawRSA(publicKey, false),
         }
 
         commit('set', { rsa })
