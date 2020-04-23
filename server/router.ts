@@ -18,17 +18,15 @@ export default async (props: Props): Promise<void> => {
 
   if (config.isDevelopment) {
     await app.listen(config.development.backendPort)
-
     success(`Running on port ${config.development.backendPort}.`)
   } else {
-    app.use('/', express.static(path.resolve('dist')))
+    app.use('/', express.static(path.resolve(__dirname, '..', 'dist', 'client')))
     
     app.use('*', (req, res) => {
-      res.sendFile(path.resolve('dist', 'index.html'))
+      res.sendFile(path.resolve(__dirname, '..', 'dist', 'client'))
     })
-  
-    await app.listen(config.port)
 
+    await app.listen(config.port)
     success(`Running on port ${config.port}.`)
   }
 }

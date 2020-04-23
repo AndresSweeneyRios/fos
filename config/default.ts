@@ -8,7 +8,7 @@ const defaultRole: Role = {
   id: 'default',
 }
 
-export default {
+const defaultConfig: Config = {
   development: {
     backendPort: 8085,
     frontendPort: 8080,
@@ -38,4 +38,6 @@ export default {
   port: 80,
 
   isDevelopment: process.env.NODE_ENV === 'development',
-} as Config
+}
+
+export default defaultConfig

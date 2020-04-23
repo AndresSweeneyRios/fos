@@ -1,12 +1,10 @@
 <template lang="pug">
-  .markdown( v-html="md(escapeHTML($slots.default[0].text))" )
+  .markdown( v-html="md($slots.default[0].text)" )
 </template>
 
 <script>
   import MarkdownIt from 'markdown-it'
   import Prism from 'prismjs'
-  // import marked from 'marked'
-  // import hljs from 'highlight.js'
 
   const markdown = MarkdownIt({
     linkify: true,
@@ -19,18 +17,13 @@
 
   export default {
     methods: {
-      escapeHTML (text) {
-        // console.log(hljs.highlightBlock(text))
-        return text
-      },
-
       md: string => markdown.render(string),
     },
   }
 </script>
 
 <style lang="sass" scoped>
-  @import '../../css/prism.css'
+  @import '~css/prism.css'
 </style>
 
 <style lang="sass">

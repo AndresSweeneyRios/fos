@@ -92,6 +92,9 @@ module.exports = () => ({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      'css': path.resolve(__dirname, 'src', 'css'),
+      'sass': path.resolve(__dirname, 'src', 'sass'),
+      'assets': path.resolve(__dirname, 'src', 'assets'),
     },
     extensions: ['.tsx', '.ts', '.js', '.vue'],
   },
@@ -101,7 +104,7 @@ module.exports = () => ({
   },
 
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '..', 'dist', 'client'),
     filename: "[name].bundle.js",
   },
 
