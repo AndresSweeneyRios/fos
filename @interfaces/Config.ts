@@ -27,6 +27,14 @@ interface Config {
       isMuted: boolean
     }>
   }>
+
+  meta: {
+    title: string
+    description: string
+    thumbnail: string
+    themeColor: string
+    url: string
+  }
 }
 
 export default Config

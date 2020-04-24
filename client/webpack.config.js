@@ -5,6 +5,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 module.exports = () => ({
   plugins: [
     new HtmlWebpackPlugin({
+      inject: true,
       template: './src/index.pug',
     }),
 
@@ -21,7 +22,7 @@ module.exports = () => ({
             use: ['pug-plain-loader'],
           },
           {
-            use: ['raw-loader', 'pug-plain-loader'],
+            use: ['pug-loader'],
           },
         ],
       },
@@ -29,6 +30,12 @@ module.exports = () => ({
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'css-loader',
+        ],
       },
       {
         test: /\.sass$/,
@@ -92,6 +99,7 @@ module.exports = () => ({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      'config': path.resolve(__dirname, '..', 'config', 'index.ts'),
       'css': path.resolve(__dirname, 'src', 'css'),
       'sass': path.resolve(__dirname, 'src', 'sass'),
       'assets': path.resolve(__dirname, 'src', 'assets'),

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development multiscript yarn server:dev + yarn client:dev",
-    "build": "cross-env NODE_ENV=production yarn server:build && yarn client:build",
+    "build": "cross-env NODE_ENV=production yarn client:build",
     "start": "node .",
     "server:dev": "ts-node-dev server",
     "server:build": "tsc",

@@ -95,7 +95,7 @@ module.exports = {
       ],
     },
     {
-      files: ['server/**.ts'],
+      files: ['**.ts'],
 
       extends: [
         "plugin:@typescript-eslint/eslint-recommended",
