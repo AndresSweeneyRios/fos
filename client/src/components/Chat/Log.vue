@@ -8,7 +8,7 @@
     //-     p.content Hello world!
 
     .message( v-for="({ avatar, name, date, content }, key) in messages" :key="key" )
-      img.avatar( :src="avatar" )
+      img.avatar( :src="avatar" :alt="`${name}'s avatar`" )
       
       div
         .name {{ name }}
@@ -105,6 +105,7 @@ function helloWorld () {
     .message
       display: flex
       width: 100%
+      align-items: flex-start
 
       > *
         width: 100%
@@ -115,6 +116,7 @@ function helloWorld () {
       img.avatar
         width: 45px
         height: 45px
+        object-fit: cover
         background-color: white
         margin-right: 15px
         clip-path: circle(50% at 50% 50%)

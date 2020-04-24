@@ -1,8 +1,9 @@
 <template lang="pug">
   section.input
-    button.attach
+    button.attach( aria-label="Add attachment" )
       Icon paperclip
-    textarea( placeholder="Enter message.." )
+    label( for="message-input" ) Enter message
+    textarea( placeholder="Enter message.." id="message-input" )
 </template>
 
 <script>
@@ -25,6 +26,11 @@
     button.attach
       height: 45px
       width: 45px
+
+    label
+      opacity: 0
+      pointer-events: none
+      position: absolute
 
     textarea
       height: 45px

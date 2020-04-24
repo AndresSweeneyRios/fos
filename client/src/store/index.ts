@@ -21,13 +21,13 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    set (state, payload) {
+    set (state, payload): void {
       Object.assign(state, payload)
     },
   },
 
   actions: {
-    async CryptoSetup ({ commit }) {
+    async CryptoSetup ({ commit }): Promise<void> {
       const encodedRSAPrivateKey: string = await db.getItem('rsa_private_key')
       const encodedRSAPublicKey: string = await db.getItem('rsa_public_key')
 

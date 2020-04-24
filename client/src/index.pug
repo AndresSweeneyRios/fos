@@ -28,8 +28,8 @@ html( lang="en" )
     title #{ require('config').default.meta.title }
 
     style 
-      | #{ require('!!css-loader?modules!@/css/preload.css') }
-      | #{ require('!!css-loader?modules!@/css/prism.css') }
+      | #{ require('@/css/preload.css') }
+      | #{ require('@/css/prism.css') }
     
   body
     #app

@@ -1,13 +1,13 @@
 <template lang="pug">
   section.navigation
     .bar
-      button 
+      button( aria-label="Channels menu" )
         Icon list
 
-      button
+      button( aria-label="Users menu" )
         Icon user
 
-      button.settings
+      button.settings( aria-label="Settings menu" )
         Icon settings
 
     .panel

@@ -12,8 +12,6 @@
 </style>
 
 <script>
-  import db from 'localforage'
-
   import Log from '@/components/Chat/Log'
   import Input from '@/components/Chat/Input'
 
@@ -28,7 +26,6 @@
     async mounted () {
       await this.$store.dispatch('CryptoSetup')
       window.rsa = this.$store.state.rsa
-      window.db = db
     },
   }
 </script>

@@ -1,15 +1,12 @@
 import Vue from 'vue'
 
-import './registerServiceWorker'
+// import './registerServiceWorker'
 
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import config from 'config'
 import { VNode } from 'vue/types/umd'
-
-console.log(config.meta)
 
 new Vue({
   el: '#app',

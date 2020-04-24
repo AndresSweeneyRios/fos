@@ -1,6 +1,8 @@
 const ALGORITHM = 'RSA-OAEP'
 const HASH = 'SHA-256'
 
+import RSA from '@interfaces/RSA'
+
 const decode = (buffer: ArrayBuffer) => String.fromCharCode(
   ...new Uint8Array(buffer),
 )
@@ -24,29 +26,34 @@ export const ImportRSAKey = (
   encodedKey: string, 
   extractable = false, 
   usages: Array<string>,
-) => crypto.subtle.importKey(
-  'jwk', 
-  JSON.parse(atob(encodedKey)), 
-  {
-    name: ALGORITHM,
-    hash: HASH, 
-  }, 
-  extractable, 
-  usages,
+): PromiseLike<CryptoKey> => (
+  crypto.subtle.importKey(
+    'jwk', 
+    JSON.parse(atob(encodedKey)), 
+    {
+      name: ALGORITHM,
+      hash: HASH, 
+    }, 
+    extractable, 
+    usages,
+  )
 )
 
-export const ExportRSAKey = async (key: CryptoKey) => btoa(JSON.stringify(
-  await crypto.subtle.exportKey('jwk', key),
-))
+export const ExportRSAKey = async (key: CryptoKey): Promise<string> => (
+  btoa(JSON.stringify(
+    await crypto.subtle.exportKey('jwk', key),
+  ))
+)
+
 export const RawRSA = async (
   key: CryptoKey, 
   isPrivate: boolean,
-) => ({
-  encrypt: async (data: string) => decode(
+): Promise<RSA> => ({
+  encrypt: async (data: string): Promise<string> => decode(
     await crypto.subtle.encrypt(ALGORITHM, key, encode(data)),
   ),
 
-  decrypt: async (data: string) => decode(
+  decrypt: async (data: string): Promise<string> => decode(
     await crypto.subtle.decrypt(ALGORITHM, key, encode(data)),
   ),
 
@@ -56,7 +63,7 @@ export const RawRSA = async (
 export const RSA = async (
   encodedKey: string, 
   isPrivate: boolean,
-) => {
+): Promise<RSA> => {
   const key = await ImportRSAKey(
     encodedKey, 
     !isPrivate, 

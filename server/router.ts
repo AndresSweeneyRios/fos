@@ -1,5 +1,7 @@
 import path from 'path'
 import express from 'express'
+import compression from 'compression'
+
 import api from './api'
 
 import Props from '@interfaces/Props'
@@ -11,6 +13,8 @@ export default async (props: Props): Promise<void> => {
   } = props
   
   const app = express()
+
+  app.use(compression())
 
   app.use(express.json())
 

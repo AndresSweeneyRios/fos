@@ -3,21 +3,24 @@
 </template>
 
 <script>
-  import MarkdownIt from 'markdown-it'
-  import Prism from 'prismjs'
+  import { parse as Marked } from 'marked'
 
-  const markdown = MarkdownIt({
-    linkify: true,
+  import { 
+    languages,
+    highlight,
+  } from 'prismjs'
+
+  Marked.setOptions({
     highlight (string, language) {
-      return language && Prism.languages[language]  
-        ? Prism.highlight(string, Prism.languages[language])
+      return language && languages[language]  
+        ? highlight(string, languages[language])
         : string
     },
   })
 
   export default {
     methods: {
-      md: string => markdown.render(string),
+      md: string => Marked(string),
     },
   }
 </script>
