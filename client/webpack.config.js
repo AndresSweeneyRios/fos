@@ -1,6 +1,15 @@
+/* eslint-disable camelcase */
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin')
+const WebpackPwaManifest = require('webpack-pwa-manifest')
+
+const tsOptions = require('../tsconfig.json')
+
+require('ts-node').register(tsOptions)
+
+const { meta } = require('../config/index.ts').default
 
 module.exports = () => ({
   plugins: [
@@ -10,6 +19,35 @@ module.exports = () => ({
     }),
 
     new VueLoaderPlugin(),
+
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
+    }),
+    
+    new WebpackPwaManifest({
+      name: meta.title,
+      short_name: meta.title,
+      start_url: '/',
+      description: meta.description,
+      background_color: meta.themeColor,
+      crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
+      // icons: [
+      //   {
+      //     src: path.resolve('src/assets/logo.png'),
+      //     sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+      //   },
+      //   {
+      //     src: path.resolve('src/assets/large-icon.png'),
+      //     size: '1024x1024', // you can also use the specifications pattern
+      //   },
+      //   {
+      //     src: path.resolve('src/assets/maskable-icon.png'),
+      //     size: '1024x1024',
+      //     purpose: 'maskable',
+      //   },
+      // ],
+    }),
   ],
 
   module: {

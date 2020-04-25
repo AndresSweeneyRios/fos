@@ -9,7 +9,7 @@
     "server:dev": "ts-node-dev server",
     "server:build": "tsc",
     "client:dev": "cd client && webpack-dev-server --mode=development --display=minimal",
-    "client:build": "cd client && webpack -p --mode production",
+    "client:build": "cd client && webpack --mode production",
     "lint": "eslint --fix --ext .js,.vue,.ts server client/src"
   },
   "dependencies": {
@@ -57,6 +57,8 @@
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.10.3",
+    "webpack-pwa-manifest": "^4.2.0",
+    "workbox-webpack-plugin": "^5.1.3"
   }
 }

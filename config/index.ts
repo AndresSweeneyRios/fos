@@ -1,7 +1,7 @@
 import path from 'path'
 
-import Config from '@interfaces/Config'
-import Role from '@interfaces/Role'
+import Config from '../@interfaces/Config'
+import Role from '../@interfaces/Role'
 
 const defaultRole: Role = {
   id: 'default',
