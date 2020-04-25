@@ -42,7 +42,7 @@ const config: Config = {
 
   dataPath: path.join(__dirname, '..', 'data'),
 
-  port: 80,
+  port: Number(process.env.PORT) || 44444,
 
   isDevelopment: process.env.NODE_ENV === 'development',
 }
