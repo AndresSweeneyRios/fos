@@ -1,15 +1,16 @@
-import { Router } from 'express'
+import { Middleware } from 'koa'
+import Router from 'koa-router'
 
 import Props from '@interfaces/Props'
 
-export default (props: Props) => {
-  const router = Router()
+import UserRouter from './user'
 
-  const { db } = props
+export default (props: Props): Middleware => {
+  const router = new Router()
 
-  const Users = db('users')
+  router.use('/users', UserRouter(props))
 
-  Users.insert({ 'abc': 'def' })
-  
-  return router
+  router.get('/', ctx => ctx.body = 'test')
+
+  return router.routes()
 }

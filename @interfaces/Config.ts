@@ -1,4 +1,5 @@
 import Role from './Role'
+import Message from './Message'
 
 interface Config {
   development: {
@@ -26,6 +27,8 @@ interface Config {
       canPingAll: boolean
       isMuted: boolean
     }>
+
+    messages?: Array<Message>
   }>
 
   meta: {

@@ -1,36 +1,44 @@
 import path from 'path'
-import express from 'express'
-import compression from 'compression'
+
+import koa from 'koa'
+import compression from 'koa-compress'
+import json from 'koa-json'
+import Router from 'koa-router'
+import send from 'koa-send'
+
+import fs from 'fs'
 
 import api from './api'
 
 import Props from '@interfaces/Props'
 
-export default async (props: Props): Promise<void> => {
+export default (props: Props): void => {
+  const app = new koa()
+  const router = new Router()
+
   const {
     config, 
     success,
   } = props
-  
-  const app = express()
 
   app.use(compression())
+  app.use(json())
 
-  app.use(express.json())
+  router.use('/api', api(props))
 
-  app.use(api(props))
+  app.use(router.routes())
 
-  if (config.isDevelopment) {
-    await app.listen(config.development.backendPort)
-    success(`Running on port ${config.development.backendPort}.`)
-  } else {
-    app.use('/', express.static(path.resolve(__dirname, '..', 'dist', 'client')))
-    
-    app.use('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, '..', 'dist', 'client'))
-    })
+  router.get('*', async ctx => {
+    if (fs.existsSync(path.resolve('dist/client') + ctx.path)) {
+      await send(ctx, 'dist/client' + ctx.path)
+    } else {
+      await send(ctx, 'dist/client/index.html')
+    }
+  })
 
-    await app.listen(config.port)
-    success(`Running on port ${config.port}.`)
-  }
+  const port = config.isDevelopment ? config.development.backendPort : config.port
+
+  app.listen(port)
+  
+  success(`Running on port ${port}.`)
 }

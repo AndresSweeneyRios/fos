@@ -25,7 +25,7 @@ const init = async (): Promise<void> => {
     db,
   }
 
-  await router(props)
+  router(props)
 }
 
 init().catch(failure)
