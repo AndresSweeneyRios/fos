@@ -1,24 +1,33 @@
-# fos
+# FOS
 
-## Project setup
+## prerequisites
+- node.js 12+
+- yarn
+
+## tech stack
+- typescript
+- vue.js
+- sass
+- pug
+- koa
+- webpack
+
+## installation
 ```
-yarn install
+git clone https://github.com/Andr3wRiv3rs/fos
+cd fos
+yarn
 ```
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## commands
+```json
+{
+  "dev" // starts frontend and backend in development mode
+  "build" // builds frontend
+  "start" //
+  "server:dev"
+  "server:build"
+  "client:dev"
+  "client:build"
+  "lint"
+}

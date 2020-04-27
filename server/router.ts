@@ -1,12 +1,10 @@
 import path from 'path'
+import fs from 'fs'
 
 import koa from 'koa'
 import compression from 'koa-compress'
-import json from 'koa-json'
 import Router from 'koa-router'
-import send from 'koa-send'
-
-import fs from 'fs'
+import bodyParser from 'koa-bodyparser'
 
 import api from './api'
 
@@ -19,22 +17,31 @@ export default (props: Props): void => {
   const {
     config, 
     success,
+    failure,
   } = props
 
   app.use(compression())
-  app.use(json())
+  app.use(bodyParser())
+
+  app.on('error', error => failure(error))
 
   router.use('/api', api(props))
 
-  app.use(router.routes())
+  router.get('*', ctx => {
+    const file = path.join(__dirname, '../dist/client', ctx.path)
+    const index = path.join(__dirname, '../dist/client/index.html')
 
-  router.get('*', async ctx => {
-    if (fs.existsSync(path.resolve('dist/client') + ctx.path)) {
-      await send(ctx, 'dist/client' + ctx.path)
+    if (fs.existsSync(index)) {
+      const result = ctx.path === '/' || !fs.existsSync(file) ? index : file
+      const [extension] = /\.[^.]+$/.exec(result)
+      ctx.type = extension
+      ctx.body = fs.readFileSync(result, 'utf8')
     } else {
-      await send(ctx, 'dist/client/index.html')
+      throw new Error('Client hasn\'t been built yet.')
     }
   })
+
+  app.use(router.routes())
 
   const port = config.isDevelopment ? config.development.backendPort : config.port
 

@@ -10,7 +10,7 @@ export default (props: Props): Middleware => {
 
   router.use('/users', UserRouter(props))
 
-  router.get('/', ctx => ctx.body = 'test')
+  router.use('/test', ctx => ctx.body = { a: 'b' })
 
   return router.routes()
 }
