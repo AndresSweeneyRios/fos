@@ -1,7 +1,7 @@
-import Role from './Role'
-import Message from './Message'
+import { Role } from './Role'
+import { Message } from './Message'
 
-interface Config {
+export interface Config {
   development: {
     backendPort: number
     frontendPort: number
@@ -39,5 +39,3 @@ interface Config {
     url: string
   }
 }
-
-export default Config

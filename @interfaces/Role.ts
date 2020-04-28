@@ -1,5 +1,3 @@
-interface Role {
+export interface Role {
   id: string
 }
-
-export default Role

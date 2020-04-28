@@ -15,6 +15,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@interfaces/*": ["../@interfaces/*"],
+      "@interfaces": ["../@interfaces"],
     },
   },
   "include": [

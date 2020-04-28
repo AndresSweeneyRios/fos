@@ -1,7 +1,7 @@
 const ALGORITHM = 'RSA-OAEP'
 const HASH = 'SHA-256'
 
-import RSA from '@interfaces/RSA'
+import { RSA as RSAInterface } from '@interfaces'
 
 const decode = (
   buffer: ArrayBuffer,
@@ -58,7 +58,7 @@ export const ExportRSAKey = async (
 export const RawRSA = async (
   key: CryptoKey, 
   isPrivate: boolean,
-): Promise<RSA> => ({
+): Promise<RSAInterface> => ({
   encrypt: async (data: string): Promise<string> => decode(
     await crypto.subtle.encrypt(ALGORITHM, key, encode(data)),
   ),
@@ -73,7 +73,7 @@ export const RawRSA = async (
 export const RSA = async (
   encodedKey: string, 
   isPrivate: boolean,
-): Promise<RSA> => {
+): Promise<RSAInterface> => {
   const key = await ImportRSAKey(
     encodedKey, 
     !isPrivate, 

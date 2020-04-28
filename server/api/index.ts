@@ -1,7 +1,7 @@
 import { Middleware } from 'koa'
 import Router from 'koa-router'
 
-import Props from '@interfaces/Props'
+import { Props } from '@interfaces'
 
 import UserRouter from './user'
 

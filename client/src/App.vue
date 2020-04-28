@@ -1,7 +1,6 @@
 <template lang="pug">
-  main
-    Navigation
-    router-view
+  #app
+    component.layout( :is="layout" v-if="route" )
 </template>
 
 <style lang="sass">
@@ -9,19 +8,30 @@
 </style>
 
 <style lang="sass" scoped>
-  main
+  #app, .layout
     display: flex
     width: 100vw
     height: 100vh
-    background-color: var(--background)
 </style>
 
 <script>
-  import Navigation from '@/components/Navigation'
+  import DefaultLayout from '@/layouts/Default'
 
   export default {
     components: {
-      Navigation,
+      DefaultLayout,
+    },
+
+    computed: {
+      route () {
+        return this.$router.options.routes.find(
+          ({ name }) => name === this.$route.name,
+        )
+      },
+
+      layout () {
+        return (this.route && this.route.layout) || DefaultLayout
+      },
     },
   }
 </script>

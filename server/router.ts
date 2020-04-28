@@ -1,6 +1,5 @@
 import path from 'path'
 import fs from 'fs'
-
 import koa from 'koa'
 import compression from 'koa-compress'
 import Router from 'koa-router'
@@ -8,7 +7,7 @@ import bodyParser from 'koa-bodyparser'
 
 import api from './api'
 
-import Props from '@interfaces/Props'
+import { Props } from '@interfaces'
 
 export default (props: Props): void => {
   const app = new koa()
@@ -35,7 +34,7 @@ export default (props: Props): void => {
       const result = ctx.path === '/' || !fs.existsSync(file) ? index : file
       const [extension] = /\.[^.]+$/.exec(result)
       ctx.type = extension
-      ctx.body = fs.readFileSync(result, 'utf8')
+      ctx.body = fs.createReadStream(result)
     } else {
       throw new Error('Client hasn\'t been built yet.')
     }

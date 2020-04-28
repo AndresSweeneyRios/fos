@@ -1,12 +1,14 @@
-import Role from './Role'
+import { Role } from './Role'
 
-interface User {
+export interface User {
   publicKey: string
   id: number
-  name: string
   roles: Array<Role>
   createdAt: number
-  avatar: null | string
+  username: string
+  hash: string
+  nickname?: string
+  avatar?: string
 
   externalAccounts: {
     discord?: string
@@ -16,5 +18,3 @@ interface User {
     twitter?: string
   }
 }
-
-export default User

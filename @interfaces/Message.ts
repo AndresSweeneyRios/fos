@@ -1,7 +1,5 @@
-import User from './User'
+import { User } from './User'
 
-interface Message {
+export interface Message {
   user: User
 }
-
-export default Message

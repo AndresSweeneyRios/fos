@@ -1,10 +1,8 @@
-import Config from './Config'
+import { Config } from './Config'
 
-interface Props {
+export interface Props {
   config: Config
   success: Function
   failure: Function
   db: Function
 }
-
-export default Props

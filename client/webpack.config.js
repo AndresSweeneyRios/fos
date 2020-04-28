@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
+const RobotstxtPlugin = require('robotstxt-webpack-plugin')
 
 const tsOptions = require('../tsconfig.json')
 
@@ -31,7 +32,7 @@ module.exports = () => ({
       start_url: '/',
       description: meta.description,
       background_color: meta.themeColor,
-      crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
+      crossorigin: 'use-credentials',
       // icons: [
       //   {
       //     src: path.resolve('src/assets/logo.png'),
@@ -47,6 +48,11 @@ module.exports = () => ({
       //     purpose: 'maskable',
       //   },
       // ],
+    }),
+
+    new RobotstxtPlugin({
+      userAgent: "*",
+      allow: "/",
     }),
   ],
 
@@ -155,5 +161,6 @@ module.exports = () => ({
 
   devServer: {
     port: 3000,
+    historyApiFallback: true,
   },
 })
