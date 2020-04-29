@@ -33,5 +33,9 @@
         return (this.route && this.route.layout) || DefaultLayout
       },
     },
+
+    mounted () {
+      this.$store.dispatch('CryptoSetup')
+    },
   }
 </script>

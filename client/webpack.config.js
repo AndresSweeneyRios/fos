@@ -10,7 +10,10 @@ const tsOptions = require('../tsconfig.json')
 
 require('ts-node').register(tsOptions)
 
-const { meta } = require('../config/index.ts').default
+const {
+  meta, 
+  development, 
+} = require('../config/index.ts').default
 
 module.exports = () => ({
   plugins: [
@@ -162,5 +165,8 @@ module.exports = () => ({
   devServer: {
     port: 3000,
     historyApiFallback: true,
+    proxy: {
+      '/api': `http://localhost:${development.backendPort}`,
+    },
   },
 })

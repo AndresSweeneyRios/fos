@@ -27,3 +27,4 @@ config.json
 /client/dist
 /client/built
 /config/custom
+/credentials

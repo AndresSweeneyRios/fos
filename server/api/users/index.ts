@@ -3,14 +3,14 @@ import Router from 'koa-router'
 
 import { Props } from '@interfaces'
 
-import UsersRouter from './users'
+import NewUser from './new'
+import Login from './login'
 
 export default (props: Props): Middleware => {
   const router = new Router()
 
-  router.use('/users', UsersRouter(props))
-
-  router.use('/test', ctx => ctx.body = { a: 'b' })
+  router.use('/new', NewUser(props))
+  router.use('/login', Login(props))
 
   return router.routes()
 }

@@ -28,6 +28,10 @@ button
   color: var(--white)
   position: relative
   transition: color 0.2s
+
+  &[disabled]
+    opacity: 0.7
+    pointer-events: none
   
   > *
     position: relative

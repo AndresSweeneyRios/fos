@@ -4,6 +4,7 @@ import Datastore from 'nedb-promises'
 
 import config from '../config'
 import router from './router'
+import jwt from './utils/jwt'
 
 const success = (...args: Array<string>): void => {
   console.log(`${ chalk.bgGreen.black(' API ') }`, ...args, '\n')
@@ -23,6 +24,7 @@ const init = async (): Promise<void> => {
     success,
     failure,
     db,
+    jwt,
   }
 
   router(props)

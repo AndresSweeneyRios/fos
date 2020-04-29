@@ -8,8 +8,6 @@ import {
   UserBody, 
 } from '@interfaces'
 
-import generateID from '../utils/id'
-
 export default (props: Props): Middleware => {
   const router = new Router()
 
@@ -19,37 +17,37 @@ export default (props: Props): Middleware => {
 
   const Users = db('users')
 
-  router.post('/new', async ctx => {
+  router.post('/', async ctx => {
     const {
-      publicKey, 
       password,
       username,
-    }: UserBody = ctx.body
+    }: UserBody = ctx.request.body
 
-    if (!publicKey) return ctx.throw(400, 'No public key provided.')
     if (!password) return ctx.throw(400, 'No password provided.')
     if (!username) return ctx.throw(400, 'No username provided.')
     if (password.length < 6) return ctx.throw(400, 'Invalid password.')
     if (/[^A-z0-9_\- \.]/.test(username)) return ctx.throw(400, 'Invalid username.')
 
-    const userExists = Boolean(await Users.find({ username }))
+    const user: User = await Users.findOne({ username })
 
-    if (userExists) return ctx.throw(400, 'Username taken.')
+    if (!user) return ctx.throw(401, 'The username or password you entered is incorrect.')
 
-    const user: User = {
-      publicKey,
+    const isCorrectPassword = await argon2.verify(user.hash, password)
+
+    if (!isCorrectPassword) return ctx.throw(401, 'The username or password you entered is incorrect.')
+
+    const {
+      createdAt,
+      id,
+      externalAccounts,
+    } = user
+
+    ctx.body = {
       username,
-      hash: await argon2.hash(password),
-      createdAt: Date.now(),
-      roles: [],
-      id: generateID(),
-      avatar: null,
-      externalAccounts: {},
+      createdAt,
+      id,
+      externalAccounts,
     }
-
-    await Users.insert(user)
-
-    ctx.body = user
   })
 
   return router.routes()

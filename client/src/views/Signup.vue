@@ -1,45 +1,27 @@
 <template lang="pug">
-  .form.login
-    h1 Log in
-
-    .social
-      button.fill
-        Icon google
-
-      button.fill
-        Icon github
-
-      button.fill
-        Icon twitter
-
-      button.fill
-        Icon discord
-
-    .divider OR
+  .form.signup
+    h1 Sign up
 
     input( placeholder="Username.." v-model="username" )
     input( placeholder="Password.." type="password" v-model="password" )
+    input( placeholder="Confirm password.." type="password" v-model="confirmPassword" )
 
     button.fill( :disabled="!valid" @click="submit" )
       span Submit
+
     p 
-      span Don't have an account? 
-      a( href="/signup" ) Sign up
+      span Already have an account? 
+      a( href="/login" ) Log in
 </template>
 
 <script>
-  import Icon from '@/components/Icon'
-
   export default {
     data () {
       return {
         username: '',
         password: '',
+        confirmPassword: '',
       }
-    },
-
-    components: {
-      Icon,
     },
 
     methods: {
@@ -51,6 +33,10 @@
         return this.password.length >= 6 
       },
 
+      validateConfirmPassword () {
+        return this.confirmPassword === this.password
+      },
+
       submit () {
         const {
           username, 
@@ -59,11 +45,12 @@
 
         const { rsa } = this.$store.state
 
-        this.api('/api/users/login', { 
+        this.api('/api/users/new', { 
           method: 'post', 
           data: {
             username, 
             password,
+            publicKey: rsa.public.key,
           },
         }).then(console.log)
       },
@@ -71,7 +58,7 @@
 
     computed: {
       valid () {
-        return this.validateUsername() && this.validatePassword()
+        return this.validateUsername() && this.validatePassword() && this.validateConfirmPassword()
       },
     },
   }
