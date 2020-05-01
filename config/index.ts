@@ -11,8 +11,8 @@ const defaultRole: Role = {
 
 const config: Config = {
   development: {
-    backendPort: 8085,
-    frontendPort: 8080,
+    backendPort: 43434,
+    frontendPort: 44444,
   },
 
   textChannels: [
@@ -41,6 +41,15 @@ const config: Config = {
     themeColor: '#EB7A96',
     url: 'https://example.com',
   },
+
+  oAuth: {
+    discord: false,
+    github: false,
+    google: false,
+    twitter: false,
+  },
+
+  oAuthCredentials: {},
 
   dataPath: path.join(__dirname, '..', 'data'),
 

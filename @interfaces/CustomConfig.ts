@@ -2,13 +2,13 @@ import { Role } from './Role'
 import { Message } from './Message'
 import { DiscordConfig } from './discord'
 
-export interface Config {
-  development: {
+export interface CustomConfig {
+  development?: {
     backendPort: number
     frontendPort: number
   }
 
-  textChannels: Array<{
+  textChannels?: Array<{
     name: string
     id: string
 
@@ -26,7 +26,7 @@ export interface Config {
     messages?: Message[]
   }>
 
-  meta: {
+  meta?: {
     title: string
     description: string
     thumbnail: string
@@ -49,9 +49,9 @@ export interface Config {
     google?: {}
   }
 
-  port: number
+  port?: number
 
-  dataPath: string
+  dataPath?: string
 
-  isDevelopment: boolean
+  isDevelopment?: boolean
 }

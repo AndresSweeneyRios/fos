@@ -3,7 +3,7 @@ import { Role } from './Role'
 export interface User {
   publicKey: string
   id: number
-  roles: Array<Role>
+  roles: Role[]
   createdAt: number
   username: string
   hash: string

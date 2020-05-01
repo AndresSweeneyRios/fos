@@ -15,9 +15,9 @@
 
 <style lang="sass" scoped>
   a
-    position: absolute
-    bottom: 15px
-    right: 15px
+    position: fixed
+    bottom: 20px
+    right: 20px
     display: flex
     align-items: center
     justify-content: center

@@ -28,3 +28,4 @@ config.json
 /client/built
 /config/custom
 /credentials
+/config/custom.ts

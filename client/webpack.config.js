@@ -163,7 +163,8 @@ module.exports = () => ({
   },
 
   devServer: {
-    port: 3000,
+    port: development.frontendPort,
+    host: '0.0.0.0',
     historyApiFallback: true,
     proxy: {
       '/api': `http://localhost:${development.backendPort}`,
